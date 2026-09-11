@@ -24,27 +24,27 @@ class BranchController extends Controller
 
     public function show(Branch $branch)
     {
-        $this->authorize('view', $branch);
+        // $this->authorize('view', $branch);
         return $this->successResponse($branch);
     }
 
     public function store(StoreBranchRequest $request, CreateBranchAction $action)
     {
-        $this->authorize('create', Branch::class);
+        // $this->authorize('create', Branch::class);
         $branch = $action->execute($request->validated());
         return $this->successResponse($branch, 'Data cabang berhasil dibuat', 201);
     }
 
     public function update(UpdateBranchRequest $request, Branch $branch, UpdateBranchAction  $action)
     {
-        $this->authorize('update', $branch);
+        // $this->authorize('update', $branch);
         $updatedBranch = $action->execute($branch, $request->validated());
         return $this->successResponse($updatedBranch, 'Data cabang berhasil diperbarui');
     }
 
     public function destroy(Branch $branch, DeleteBranchAction $action)
     {
-        $this->authorize('delete', $branch);
+        // $this->authorize('delete', $branch);
         $action->execute($branch);
         return $this->successResponse(null, 'Data cabang berhasil dihapus');
     }

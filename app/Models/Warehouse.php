@@ -10,10 +10,10 @@ class Warehouse extends Model
 {
     use HasUuids;
     protected $fillable = [
-        warehouse_code,
-        warehouse_name, 
-        address, 
-        is_active
+        'warehouse_code',
+        'warehouse_name', 
+        'address', 
+        'is_active',
     ];
 
     public function getActivityLogOptions() : LogOptions {
