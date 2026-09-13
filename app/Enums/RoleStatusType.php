@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum EnumRoleStatus: string
+enum RoleStatusType: string
 {
     case CASHIER = 'cashier';
     case FINANCE = 'finance';
@@ -32,19 +32,38 @@ enum EnumRoleStatus: string
     }
 }
 
-enum CategoryDocument : string{
-    case SALES_ORDER = 'Sales Order';
-    case DELIVERY_NOTE = 'Delivery Note';
-    case WAREHOUSE_INVOICE = 'Warehouse Invoice';
-    case RECEIPT_NOTE = 'Receipt Note';
-    case VENDOR_INVOICE = 'Vendor Invoice';
-    case RECEIPT_INVOICE = 'Receipt Invoice';
+enum StatusStockTransferShipment: string
+{
+    case SHIPPED = 'Shipped';
+    case PARTIALLY_RECEIVED = 'Partially Received';
+    case RECEIVED = 'Received';
+ 
+    public function label(): string
+    {
+        return match ($this) {
+            self::SHIPPED => 'Sudah Dikirim',
+            self::PARTIALLY_RECEIVED => 'Diterima Sebagian',
+            self::RECEIVED => 'Diterima Lengkap',
+        };
+    }
 }
 
-enum StatusDeliveryPurchase: string{
+enum StatusDeliveryPurchase: string
+{
     case PAYMENT = 'Payment';
     case PENDING = 'Pending Shipment';
     case SHIPPED = 'Shipped';
     case DELIVERED = 'Delivered';
     case CANCELLED = 'Canceled';
+ 
+    public function label(): string
+    {
+        return match ($this) {
+            self::PAYMENT => 'Menunggu Pembayaran',
+            self::PENDING => 'Menunggu Pengiriman',
+            self::SHIPPED => 'Sudah Dikirim',
+            self::DELIVERED => 'Sudah Diterima',
+            self::CANCELLED => 'Dibatalkan',
+        };
+    }
 }
