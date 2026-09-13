@@ -3,7 +3,7 @@
 // app/Policies/BranchPolicy.php
 namespace App\Policies;
 
-use App\Enums\EnumRoleStatus;
+use App\Enums\RoleStatusType;
 use App\Models\Branch;
 use App\Models\User;
 
@@ -11,7 +11,7 @@ class BranchPolicy
 {
     public function before(User $user, string $ability): ?bool
     {
-        if ($user->hasRole(EnumRoleStatus::ADMIN, EnumRoleStatus::OWNER)) {
+        if ($user->hasRole(RoleStatusType::ADMIN, RoleStatusType::OWNER)) {
             return true;
         }
 
@@ -21,20 +21,20 @@ class BranchPolicy
     public function viewAny(User $user): bool
     {
         return $user->hasRole(
-            EnumRoleStatus::SPV_BRANCH,
-            EnumRoleStatus::STAFF_BRANCH,
-            EnumRoleStatus::FINANCE,
-            EnumRoleStatus::HR
+            RoleStatusType::SPV_BRANCH,
+            RoleStatusType::STAFF_BRANCH,
+            RoleStatusType::FINANCE,
+            RoleStatusType::HR
         );
     }
 
     public function view(User $user, Branch $branch): bool
     {
         return $user->hasRole(
-            EnumRoleStatus::SPV_BRANCH,
-            EnumRoleStatus::STAFF_BRANCH,
-            EnumRoleStatus::FINANCE,
-            EnumRoleStatus::HR
+            RoleStatusType::SPV_BRANCH,
+            RoleStatusType::STAFF_BRANCH,
+            RoleStatusType::FINANCE,
+            RoleStatusType::HR
         );
     }
 
@@ -45,7 +45,7 @@ class BranchPolicy
 
     public function update(User $user, Branch $branch): bool
     {
-        return $user->hasRole(EnumRoleStatus::SPV_BRANCH);
+        return $user->hasRole(RoleStatusType::SPV_BRANCH);
     }
 
     public function delete(User $user, Branch $branch): bool
